@@ -1,3 +1,6 @@
+mod model;
+
 fn main() {
-    println!("Hello, world!");
+    let x = "asdf";
+    println!("Hello, world!{}", x);
 }
