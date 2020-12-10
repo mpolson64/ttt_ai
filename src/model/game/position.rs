@@ -25,6 +25,20 @@ impl PositionError {
     }
 }
 
+fn square_to_index(square: square::Square) -> usize {
+    return match square {
+        square::Square::A1 => 0,
+        square::Square::A2 => 1,
+        square::Square::A3 => 2,
+        square::Square::B1 => 3,
+        square::Square::B2 => 4,
+        square::Square::B3 => 5,
+        square::Square::C1 => 6,
+        square::Square::C2 => 7,
+        square::Square::C3 => 8,
+    };
+}
+
 pub fn winner(position: Position) -> token::Token {
     // From A1
     if position.board[0] != token::Token::Empty {
@@ -40,7 +54,7 @@ pub fn winner(position: Position) -> token::Token {
             return position.board[0];
         }
     }
-    
+
     // From A2
     if position.board[1] != token::Token::Empty {
         if position.board[1] == position.board[4] && position.board[1] == position.board[7] {
@@ -77,17 +91,7 @@ pub fn winner(position: Position) -> token::Token {
 }
 
 pub fn apply_move(position: Position, square: square::Square, token: token::Token) -> Result<Position, PositionError> {
-    let i = match square {
-        square::Square::A1 => 0,
-        square::Square::A2 => 1,
-        square::Square::A3 => 2,
-        square::Square::B1 => 3,
-        square::Square::B2 => 4,
-        square::Square::B3 => 5,
-        square::Square::C1 => 6,
-        square::Square::C2 => 7,
-        square::Square::C3 => 8,
-    };
+    let i = square_to_index(square);
 
     return match position.board[i] {
         token::Token::Empty =>{
